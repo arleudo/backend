@@ -47,4 +47,14 @@ export class UserController {
             }
         }
     }
+
+    public login = async (req: Request, res: Response) => {
+        try {
+            res.status(StatusCodes.OK).json(await this.service.login(req.body));
+        } catch (error) {
+            if (error instanceof FullStackException) {
+                res.status(error.errorCode).json(error);
+            }
+        }
+    }
 }

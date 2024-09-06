@@ -1,4 +1,4 @@
-import { IUser, IUserInput, IUserProvider } from "../models";
+import { IUser, IUserInput, IUserLoginInput, IUserProvider } from "../models";
 
 export class UserService {
     private provider: IUserProvider;
@@ -21,5 +21,9 @@ export class UserService {
 
     public delete = async (id: string) => {
         return await this.provider.delete(id);
+    }
+
+    public login = async (user: IUserLoginInput) => {
+        return await this.provider.login(user);
     }
 }

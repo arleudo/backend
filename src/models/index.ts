@@ -14,6 +14,11 @@ export interface IUserInput {
     password: string;
 }
 
+export interface IUserLoginInput {
+    email: string;
+    password: string;
+}
+
 //-------------------------------- Pressions -----------------------------------//
 export interface IPression {
     id: string;
@@ -55,6 +60,7 @@ export abstract class IUserProvider {
     abstract create(user: IUserInput): Promise<IUser>;
     abstract delete(id: string): Promise<void>;
     abstract update(user: IUser): Promise<IUser>;
+    abstract login(user: IUserLoginInput): Promise<IUser>;
 }
 
 export abstract class IPressionProvider {
