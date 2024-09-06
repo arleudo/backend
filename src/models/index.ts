@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Pression, User } from "@prisma/client";
 
 //-------------------------------- Users -----------------------------------//
 export interface IUser {
@@ -66,8 +66,8 @@ export abstract class IUserProvider {
 }
 
 export abstract class IPressionProvider {
-    abstract list(): Promise<IPression[]>;
-    abstract create(pression: IPressionInput): Promise<IPression>;
+    abstract list(): Promise<Pression[] | null>;
+    abstract create(pression: IPressionInput): Promise<Pression | null>;
     abstract delete(id: string): Promise<void>;
-    abstract update(pression: IPression): Promise<IPression>;
+    abstract update(pression: Pression): Promise<Pression | null>;
 }

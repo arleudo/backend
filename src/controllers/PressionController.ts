@@ -1,5 +1,5 @@
 import { PressionService } from "../services";
-import { FilePressionProvider } from "../providers";
+import { PrismaPressionProvider } from "../providers";
 import { Request, Response } from "express"
 import { StatusCodes } from "http-status-codes";
 import { IPressionProvider } from "../models";
@@ -10,7 +10,7 @@ export class PressionController {
     private service: PressionService;
 
     constructor() {
-        this.provider = new FilePressionProvider();
+        this.provider = new PrismaPressionProvider();
         this.service = new PressionService(this.provider);
     }
 
