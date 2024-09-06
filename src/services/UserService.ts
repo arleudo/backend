@@ -1,4 +1,5 @@
-import { IUser, IUserInput, IUserLoginInput, IUserProvider } from "../models";
+import { User } from "@prisma/client";
+import { IUserInput, IUserLoginInput, IUserProvider } from "../models";
 
 export class UserService {
     private provider: IUserProvider;
@@ -15,7 +16,7 @@ export class UserService {
         return await this.provider.create(user);
     }
 
-    public update = async (user: IUser) => {
+    public update = async (user: User) => {
         return await this.provider.update(user);
     }
 

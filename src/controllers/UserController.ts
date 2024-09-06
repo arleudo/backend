@@ -1,16 +1,16 @@
 import { UserService } from "../services";
-import { MemoryUserProvider } from "../providers";
 import { Request, Response } from "express"
 import { StatusCodes } from "http-status-codes";
 import { IUserProvider } from "../models";
 import { FullStackException } from "../errors";
+import { PrismaUserProvider } from "../providers";
 
 export class UserController {
     private provider: IUserProvider;
     private service: UserService;
 
     constructor() {
-        this.provider = new MemoryUserProvider();
+        this.provider = new PrismaUserProvider();
         this.service = new UserService(this.provider);
     }
 

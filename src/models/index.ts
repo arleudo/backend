@@ -1,3 +1,5 @@
+import { User } from "@prisma/client";
+
 //-------------------------------- Users -----------------------------------//
 export interface IUser {
     id: string;
@@ -56,11 +58,11 @@ export interface IDialogStore {
 }
 
 export abstract class IUserProvider {
-    abstract list(): Promise<IUser[]>;
-    abstract create(user: IUserInput): Promise<IUser>;
+    abstract list(): Promise<User[] | null>;
+    abstract create(user: IUserInput): Promise<User | null>;
     abstract delete(id: string): Promise<void>;
-    abstract update(user: IUser): Promise<IUser>;
-    abstract login(user: IUserLoginInput): Promise<IUser>;
+    abstract update(user: User): Promise<User | null>;
+    abstract login(user: IUserLoginInput): Promise<User | null>;
 }
 
 export abstract class IPressionProvider {
