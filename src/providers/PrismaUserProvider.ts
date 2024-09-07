@@ -40,7 +40,7 @@ export class PrismaUserProvider implements IUserProvider {
         if (!found) {
             throw new UserNotExists();
         }
-        this.prisma.user.delete({ where: { id } })
+        await this.prisma.user.delete({ where: { id } })
     }
 
     async create(user: IUserInput): Promise<User> {
