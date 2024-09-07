@@ -10,16 +10,24 @@ export class PrismaUserProvider implements IUserProvider {
         this.prisma = new PrismaClient();
     }
     async login(user: IUserLoginInput): Promise<User | null> {
-        const found = this.prisma.user.findFirst({
+        const found = await this.prisma.user.findFirst({
             where: { email: user.email, password: user.password }
         });
         if (!found) {
             throw new UserLoginError();
         }
+        await this.prisma.user.update({
+            where: {
+                email: user.email
+            }, data: {
+                logged: true
+            }
+        });
+        found.logged = true;
         return found;
     }
     async update(user: User): Promise<User | null> {
-        const found = this.prisma.user.findFirst({ where: { id: user.id } });
+        const found = await this.prisma.user.findFirst({ where: { id: user.id } });
         if (!found) {
             throw new UserNotExists();
         }
@@ -28,7 +36,7 @@ export class PrismaUserProvider implements IUserProvider {
     }
 
     async delete(id: string): Promise<void> {
-        const found = this.prisma.user.findFirst({ where: { id } });
+        const found = await this.prisma.user.findFirst({ where: { id } });
         if (!found) {
             throw new UserNotExists();
         }
@@ -38,7 +46,7 @@ export class PrismaUserProvider implements IUserProvider {
     async create(user: IUserInput): Promise<User> {
         const found = await this.prisma.user.findFirst({ where: { email: user.email } });
         if (!found) {
-            const created = await this.prisma.user.create({data: user});
+            const created = await this.prisma.user.create({ data: user });
             return created;
         }
         throw new UserAlreadyExists();
