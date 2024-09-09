@@ -27,4 +27,8 @@ export class UserService {
     public login = async (user: IUserLoginInput) => {
         return await this.provider.login(user);
     }
+
+    public logout = async (id: string) => {
+        return await this.provider.logout(id);
+    }
 }

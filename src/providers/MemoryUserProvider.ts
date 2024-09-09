@@ -13,6 +13,13 @@ export class MemoryUserProvider implements IUserProvider {
             { id: "2", name: "Eugenia", email: "eugenia", password: "senha", created_at: new Date(), logged: false },
             { id: "3", name: "Adriana", email: "adiana", password: "senha", created_at: new Date(), logged: false }];
     }
+    async logout(id: string): Promise<void> {
+        const index = this.users.findIndex((u) => u.id === id);
+        if (index == -1) {
+            throw new UserNotExists();
+        }
+        this.users[index].logged = false;
+    }
     async login(user: IUserLoginInput): Promise<User> {
         const index = this.users.findIndex((u) => u.email === user.email && u.password === user.password);
         if (index == -1) {

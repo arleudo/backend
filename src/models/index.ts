@@ -63,6 +63,7 @@ export abstract class IUserProvider {
     abstract delete(id: string): Promise<void>;
     abstract update(user: User): Promise<User | null>;
     abstract login(user: IUserLoginInput): Promise<User | null>;
+    abstract logout(id: string): Promise<void>;
 }
 
 export abstract class IPressionProvider {
